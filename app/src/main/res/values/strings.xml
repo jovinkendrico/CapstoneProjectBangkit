@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Capstone Project</string>
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="iwaste">iWaste</string>
+    <string name="username">Username</string>
+    <string name="login">login</string>
+    <string name="password">Password</string>
+</resources>
