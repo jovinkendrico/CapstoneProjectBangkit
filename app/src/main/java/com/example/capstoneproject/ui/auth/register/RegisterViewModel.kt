@@ -9,7 +9,7 @@ class RegisterViewModel(private val repository: UserRepository):ViewModel() {
         const val TAG="RegisterViewModel"
     }
 
-    fun login(name: String,username: String, password: String){
+    fun register(name: String,username: String, password: String){
         repository.register(name,username,password)
     }
 }
