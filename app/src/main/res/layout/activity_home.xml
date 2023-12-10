@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="@+id/iwaste" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Masuk"
@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="0.737" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/registerActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Daftar"
