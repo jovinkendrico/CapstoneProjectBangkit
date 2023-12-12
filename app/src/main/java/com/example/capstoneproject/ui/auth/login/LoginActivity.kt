@@ -1,12 +1,15 @@
 package com.example.capstoneproject.ui.auth.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.example.capstoneproject.MainActivity
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityLoginBinding
 import com.example.capstoneproject.ui.auth.AuthViewModelFactory
+import kotlinx.coroutines.MainScope
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -20,10 +23,16 @@ class LoginActivity : AppCompatActivity() {
 
         binding.progressBar.visibility = View.GONE
 
-        binding.loginButton.setOnClickListener{
+        binding.loginButton.setOnClickListener {
             val username = binding.edLoginUsername.text.toString()
             val password = binding.edLoginPassword.text.toString()
-            loginViewModel.login(username,password)
+            loginViewModel.login(username, password)
+            loginViewModel.getLoginResponseLiveData().observe(this){loginResponse->
+                if(loginResponse.error == false){
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+            }
         }
+
     }
 }

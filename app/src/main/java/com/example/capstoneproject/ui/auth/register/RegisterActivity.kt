@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.auth.register
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import androidx.activity.viewModels
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityRegisterBinding
 import com.example.capstoneproject.ui.auth.AuthViewModelFactory
+import com.example.capstoneproject.ui.auth.login.LoginActivity
 import com.example.capstoneproject.ui.auth.login.LoginViewModel
 
 class RegisterActivity : AppCompatActivity() {
@@ -29,6 +31,12 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.edRegisterPassword.text.toString()
 
             registerViewModel.register(name,username,password)
+            registerViewModel.getRegisterResponseLiveData().observe(this){registerResponse->
+                if (registerResponse.error == false){
+                    startActivity(Intent(this,LoginActivity::class.java))
+                }
+            }
         }
+
     }
 }

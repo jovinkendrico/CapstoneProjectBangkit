@@ -2,8 +2,13 @@
     <string name="app_name">Capstone Project</string>
     <string name="welcome_to">WELCOME TO</string>
     <string name="iwaste">iWaste</string>
-    <string name="username">Username</string>
-    <string name="login">login</string>
-    <string name="password">Password</string>
-    <string name="name">Name</string>
+    <string name="username">USERNAME</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="password">PASSWORD</string>
+    <string name="name">NAME</string>
+    <string name="register_screen">Personal Identity</string>
+    <string name="register_guide">Please enter your email correctly and \nenter the password you want. </string>
+    <string name="login_screen">Enter</string>
+    <string name="login_guide">Please log in with the registered email. </string>
 </resources>

@@ -1,5 +1,8 @@
 package com.example.capstoneproject.data.repository.auth
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.capstoneproject.data.model.auth.login.LoginModel
 import com.example.capstoneproject.data.model.auth.register.RegisterModel
 import com.example.capstoneproject.data.remote.login.ApiService
@@ -11,36 +14,54 @@ import retrofit2.Response
 
 class UserRepository(private val apiService: ApiService) {
 
-    fun login(username: String, password: String){
+
+
+    private val registerResponse = MutableLiveData<RegisterResponse>()
+    private val loginResponse = MutableLiveData<LoginResponse>()
+
+    fun login(username: String, password: String): LiveData<LoginResponse>{
         val loginModel: LoginModel = LoginModel(username,password)
         apiService.login(loginModel).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                TODO("Not yet implemented")
+                if(response.isSuccessful){
+                    loginResponse.postValue(response.body())
+                }
+                else{
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
 
         })
+        return loginResponse
     }
 
-    fun register(name: String, username: String, password: String){
+    fun register(name: String, username: String, password: String):LiveData<RegisterResponse>{
         val registerModel: RegisterModel = RegisterModel(name,username,password)
         apiService.register(registerModel).enqueue(object : Callback<RegisterResponse>{
             override fun onResponse(
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
-                TODO("Not yet implemented")
+                if(response.isSuccessful){
+                    registerResponse.postValue(response.body())
+                }
+                else{
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
+        return registerResponse
     }
     companion object {
+        const val TAG="UserRepository"
         @Volatile
         private var instance: UserRepository? = null
         fun getInstance(

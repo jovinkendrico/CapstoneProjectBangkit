@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.example.capstoneproject"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.example.capstoneproject"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         buildConfigField("String", "BASE_URL_AUTH", "\"https://aerial-rush-405905.et.r.appspot.com/\"")
