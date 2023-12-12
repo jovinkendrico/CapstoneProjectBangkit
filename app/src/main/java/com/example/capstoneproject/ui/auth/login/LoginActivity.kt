@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import com.example.capstoneproject.MainActivity
-import com.example.capstoneproject.R
+import com.example.capstoneproject.ui.main.MainActivity
 import com.example.capstoneproject.databinding.ActivityLoginBinding
 import com.example.capstoneproject.ui.auth.AuthViewModelFactory
-import kotlinx.coroutines.MainScope
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
