@@ -27,8 +27,8 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this,HomeActivity::class.java))
         }
 
-        binding.navView.setOnClickListener { menuItem ->
-            when (menuItem.id) {
+        binding.navView.setOnNavigationItemSelectedListener() { menuItem ->
+            when (menuItem.itemId) {
                 R.id.navigation_home-> {
                     startActivity(Intent(this, MainActivity::class.java))
                     true
@@ -39,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
                 R.id.navigation_scan->{
                     startActivity(Intent(this, ScannerActivity::class.java))
+                    true
                 }
                 else -> false
             }

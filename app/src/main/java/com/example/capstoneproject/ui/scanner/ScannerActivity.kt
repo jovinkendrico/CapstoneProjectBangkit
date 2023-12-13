@@ -17,8 +17,8 @@ class ScannerActivity : AppCompatActivity() {
 
 
 
-        binding.navView.setOnClickListener { menuItem ->
-            when (menuItem.id) {
+        binding.navView.setOnNavigationItemSelectedListener() { menuItem ->
+            when (menuItem.itemId) {
                 R.id.navigation_home-> {
                     startActivity(Intent(this, MainActivity::class.java))
                     true
@@ -29,6 +29,7 @@ class ScannerActivity : AppCompatActivity() {
                 }
                 R.id.navigation_scan->{
                     startActivity(Intent(this, ScannerActivity::class.java))
+                    true
                 }
                 else -> false
             }
