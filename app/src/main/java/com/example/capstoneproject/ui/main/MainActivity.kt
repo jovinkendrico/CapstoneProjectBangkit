@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
     private var username: String? = null
     private val adapter = HistoryAdapter()
+    private var after: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -25,12 +26,18 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getSession().observe(this){
             username = it
             username?.let { mainViewModel.history(it) }
+            after = true
         }
-        
+
+
         binding.trashRv.layoutManager = LinearLayoutManager(this)
         binding.trashRv.setHasFixedSize(true)
-        mainViewModel.getListImagesItem().observe(this){
-            adapter.setData(it)
+
+
+        if(after){
+            mainViewModel.getListImagesItem().observe(this){
+                adapter.setData(it)
+            }
         }
     }
 }
