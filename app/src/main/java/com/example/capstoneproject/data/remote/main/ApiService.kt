@@ -12,13 +12,13 @@ import retrofit2.http.Part
 
 interface ApiService {
     @Multipart
-    @GET("history")
+    @POST("history")
     fun history(@Part("username") username: RequestBody): Call<HistoryResponse>;
 
-//    @Multipart
-//    @POST("predict")
-//    fun predict(
-//        @Part image: MultipartBody.Part,
-//        @Part username: RequestBody)
-//    : Call<PredictResponse>
+    @Multipart
+    @POST("predict")
+    fun predict(
+        @Part image: MultipartBody.Part,
+        @Part username: RequestBody)
+    : Call<PredictResponse>
 }
