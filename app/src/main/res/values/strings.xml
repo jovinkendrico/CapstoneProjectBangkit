@@ -20,4 +20,5 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="scan">Scan</string>
+    <string name="empty_image_warning">Tidak Ada Gambar\n</string>
 </resources>
