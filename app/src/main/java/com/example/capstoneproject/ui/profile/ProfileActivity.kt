@@ -14,6 +14,7 @@ import com.example.capstoneproject.ui.scanner.ScannerActivity
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
+
     private val profileViewModel by viewModels<ProfileViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -27,6 +28,9 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this,HomeActivity::class.java))
         }
 
+        profileViewModel.getSession().observe(this){
+            binding.textView2.text = it
+        }
         binding.navView.setOnNavigationItemSelectedListener() { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home-> {
