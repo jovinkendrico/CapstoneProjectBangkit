@@ -5,15 +5,15 @@ import com.example.capstoneproject.data.response.main.predict.PredictResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 
 interface ApiService {
+    @Multipart
     @GET("history")
-    fun history(@Field("username") username: String): Call<HistoryResponse>;
+    fun history(@Part("username") username: RequestBody): Call<HistoryResponse>;
 
 //    @Multipart
 //    @POST("predict")

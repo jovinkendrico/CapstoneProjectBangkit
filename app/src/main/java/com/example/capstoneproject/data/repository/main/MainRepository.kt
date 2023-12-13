@@ -27,7 +27,8 @@ class MainRepository(private val userPreference: UserPreference, private val api
 
     }
     fun history(username: String): LiveData<ArrayList<ImagesItem>>{
-        
+
+        val username = username.toRequestBody("text/plain".toMediaType())
         val client = apiService.history(username)
 
         client.enqueue(object :Callback<HistoryResponse>{
