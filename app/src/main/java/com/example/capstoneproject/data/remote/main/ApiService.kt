@@ -19,6 +19,6 @@ interface ApiService {
     @POST("predict")
     fun predict(
         @Part image: MultipartBody.Part,
-        @Part username: RequestBody)
+        @Part("username") username: RequestBody)
     : Call<PredictResponse>
 }
