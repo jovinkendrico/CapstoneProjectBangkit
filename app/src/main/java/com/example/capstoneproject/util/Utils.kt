@@ -106,3 +106,18 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+fun convertGMTTimestamp(inputTimestamp: String): Pair<String, String> {
+    // Parse input timestamp
+    val inputFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
+    val date = inputFormat.parse(inputTimestamp)
+
+    // Format time as 10:00 AM
+    val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+    val formattedTime = timeFormat.format(date)
+
+    // Format date as yyyy-MM-dd
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val formattedDate = dateFormat.format(date)
+
+    return Pair(formattedTime, formattedDate)
+}

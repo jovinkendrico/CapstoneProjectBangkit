@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capstoneproject.data.response.main.history.ImagesItem
 import com.example.capstoneproject.databinding.TrashLayoutBinding
+import com.example.capstoneproject.util.convertGMTTimestamp
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
 
@@ -36,6 +37,9 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(trash: ImagesItem) {
             binding.trashDescriptionTextView.text = trash.type
+            val (formattedTime, formattedDate) = convertGMTTimestamp(trash.timestamp)
+            binding.dateTextView.text = formattedDate
+            binding.timeTextView.text = formattedTime
             Glide.with(itemView.context)
                 .load(trash.imageUrl)
                 .into(binding.trashImageView)
