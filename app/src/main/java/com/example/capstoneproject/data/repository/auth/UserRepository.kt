@@ -3,6 +3,7 @@ package com.example.capstoneproject.data.repository.auth
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.capstoneproject.data.model.UserPreference
 import com.example.capstoneproject.data.model.auth.login.LoginModel
 import com.example.capstoneproject.data.model.auth.register.RegisterModel
 import com.example.capstoneproject.data.remote.login.ApiService
@@ -12,13 +13,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserRepository(private val apiService: ApiService) {
+class UserRepository(private val userPreference: UserPreference, private val apiService: ApiService) {
 
 
 
     private val registerResponse = MutableLiveData<RegisterResponse>()
     private val loginResponse = MutableLiveData<LoginResponse>()
 
+
+    suspend fun saveSession(username: String) {
+        userPreference.saveSession(username)
+    }
     fun login(username: String, password: String): LiveData<LoginResponse>{
         val loginModel: LoginModel = LoginModel(username,password)
         apiService.login(loginModel).enqueue(object : Callback<LoginResponse> {
@@ -65,10 +70,11 @@ class UserRepository(private val apiService: ApiService) {
         @Volatile
         private var instance: UserRepository? = null
         fun getInstance(
+            userPreference: UserPreference,
             apiService: ApiService
         ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(apiService)
+                instance ?: UserRepository(userPreference,apiService)
             }.also { instance = it }
     }
 }

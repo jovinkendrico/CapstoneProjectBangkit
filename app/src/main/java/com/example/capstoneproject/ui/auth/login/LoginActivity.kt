@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.login(username, password)
             loginViewModel.getLoginResponseLiveData().observe(this){loginResponse->
                 if(loginResponse.error == false){
+                    loginViewModel.saveSession(username)
                     startActivity(Intent(this, MainActivity::class.java))
                 }
             }
