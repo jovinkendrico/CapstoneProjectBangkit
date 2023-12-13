@@ -24,10 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.getSession().observe(this){
             username = it
+            username?.let { mainViewModel.history(it) }
         }
-
-        username?.let { mainViewModel.history(it) }
-
+        
         binding.trashRv.layoutManager = LinearLayoutManager(this)
         binding.trashRv.setHasFixedSize(true)
         mainViewModel.getListImagesItem().observe(this){
