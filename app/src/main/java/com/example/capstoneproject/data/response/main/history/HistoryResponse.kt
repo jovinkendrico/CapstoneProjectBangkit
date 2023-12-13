@@ -5,20 +5,20 @@ import com.google.gson.annotations.SerializedName
 data class HistoryResponse(
 
 	@field:SerializedName("images")
-	val images: List<ImagesItem?>? = null
+	val images: List<ImagesItem>
 )
 
 data class ImagesItem(
 
 	@field:SerializedName("image_url")
-	val imageUrl: String? = null,
+	val imageUrl: String,
 
 	@field:SerializedName("type")
-	val type: String? = null,
+	val type: String,
 
 	@field:SerializedName("timestamp")
-	val timestamp: String? = null,
+	val timestamp: String,
 
 	@field:SerializedName("username")
-	val username: String? = null
+	val username: String
 )

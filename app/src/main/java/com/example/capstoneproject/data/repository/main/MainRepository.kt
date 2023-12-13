@@ -1,19 +1,13 @@
 package com.example.capstoneproject.data.repository.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.liveData
 import com.example.capstoneproject.data.model.UserPreference
 import com.example.capstoneproject.data.remote.main.ApiService
-import com.example.capstoneproject.data.repository.auth.UserRepository
-import com.example.capstoneproject.data.response.auth.login.LoginResponse
 import com.example.capstoneproject.data.response.main.history.HistoryResponse
+
 import com.example.capstoneproject.data.response.main.history.ImagesItem
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -24,16 +18,37 @@ import retrofit2.Response
 class MainRepository(private val userPreference: UserPreference, private val apiService: ApiService) {
 
 
-    private val historyResponse = MutableLiveData<HistoryResponse>()
-    suspend fun getSession(): String? {
+    private val _listImagesItem = MutableLiveData<ArrayList<ImagesItem>>()
+    fun getSession(): Flow<String> {
         return userPreference.getSession()
     }
 
     fun predict(){
 
     }
-    fun history(): LiveData<List<ImagesItem>>{
-        
+    fun history(username: String): LiveData<ArrayList<ImagesItem>>{
+
+        val username = username.toRequestBody("text/plain".toMediaType())
+        val client = apiService.history(username)
+
+        client.enqueue(object :Callback<HistoryResponse>{
+            override fun onResponse(
+                call: Call<HistoryResponse>,
+                response: Response<HistoryResponse>
+            ) {
+                val data = response.body()
+                if (response.isSuccessful){
+                    if (data != null) {
+                        _listImagesItem.value = ArrayList(data.images)
+                    }
+                }
+            }
+            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+
+        })
+        return _listImagesItem
     }
     companion object {
         const val TAG="UserRepository"
