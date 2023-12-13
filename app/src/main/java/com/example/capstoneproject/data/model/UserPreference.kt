@@ -12,6 +12,13 @@ import kotlinx.coroutines.flow.first
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 class UserPreference(private val dataStore: DataStore<Preferences>) {
 
+
+    suspend fun getUser(): String {
+        val preferences = dataStore.data.first() // Synchronously retrieve the preferences
+
+        return preferences[USERNAME_KEY] ?: ""
+
+    }
     suspend fun saveSession(username: String){
         dataStore.edit { preferences->
             preferences[USERNAME_KEY] = username
