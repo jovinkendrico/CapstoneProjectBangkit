@@ -23,8 +23,11 @@ import com.example.capstoneproject.util.getImageUri
 import com.example.capstoneproject.util.reduceFileImage
 import com.example.capstoneproject.util.uriToFile
 import com.google.gson.Gson
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 
@@ -73,11 +76,12 @@ class ScannerActivity : AppCompatActivity() {
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), imageFile)
+//            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
                 "photo",
                 imageFile.name,
-                requestImageFile
+                requestFile
             )
             scannerViewModel.getSession().observe(this){
                 username = it
