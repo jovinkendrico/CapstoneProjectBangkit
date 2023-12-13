@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.trashRv.layoutManager = LinearLayoutManager(this)
         binding.trashRv.setHasFixedSize(true)
-
+        binding.trashRv.adapter = adapter
 
         if(after){
             mainViewModel.getListImagesItem().observe(this){
