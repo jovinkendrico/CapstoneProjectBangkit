@@ -1,31 +1,21 @@
-package com.example.capstoneproject.ui.profile
+package com.example.capstoneproject.ui.scanner
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import com.example.capstoneproject.R
-import com.example.capstoneproject.databinding.ActivityProfileBinding
-import com.example.capstoneproject.ui.HomeActivity
-import com.example.capstoneproject.ui.ViewModelFactory
+import com.example.capstoneproject.databinding.ActivityScannerBinding
 import com.example.capstoneproject.ui.main.MainActivity
-import com.example.capstoneproject.ui.main.MainViewModel
-import com.example.capstoneproject.ui.scanner.ScannerActivity
+import com.example.capstoneproject.ui.profile.ProfileActivity
 
-class ProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileBinding
-    private val profileViewModel by viewModels<ProfileViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
+class ScannerActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityScannerBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+        binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.logoutButton.setOnClickListener{
-            profileViewModel.logout()
-            startActivity(Intent(this,HomeActivity::class.java))
-        }
+
 
         binding.navView.setOnClickListener { menuItem ->
             when (menuItem.id) {

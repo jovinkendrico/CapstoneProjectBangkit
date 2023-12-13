@@ -23,6 +23,9 @@ class MainRepository(private val userPreference: UserPreference, private val api
         return userPreference.getSession()
     }
 
+    suspend fun logout(){
+        userPreference.logout()
+    }
     fun predict(){
 
     }

@@ -11,6 +11,7 @@ import com.example.capstoneproject.ui.auth.login.LoginViewModel
 import com.example.capstoneproject.ui.auth.register.RegisterViewModel
 import com.example.capstoneproject.ui.main.MainViewModel
 import com.example.capstoneproject.ui.profile.ProfileViewModel
+import com.example.capstoneproject.ui.scanner.ScannerViewModel
 
 class ViewModelFactory private constructor(private val repository: MainRepository): ViewModelProvider.NewInstanceFactory() {
 
@@ -22,6 +23,9 @@ class ViewModelFactory private constructor(private val repository: MainRepositor
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ScannerViewModel::class.java) -> {
+                ScannerViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

@@ -27,6 +27,11 @@ class UserPreference(private val dataStore: DataStore<Preferences>) {
         }
     }
 
+    suspend fun logout() {
+        dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
     fun getSession(): Flow<String>{
        return dataStore.data.map { pref->
            pref[USERNAME_KEY] ?: ""

@@ -15,4 +15,9 @@
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
     <string name="title_scan">Scan</string>
+    <string name="scan_trash">Trash Scanner</string>
+    <string name="user_profile">Trash Scanner</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="scan">Scan</string>
 </resources>
