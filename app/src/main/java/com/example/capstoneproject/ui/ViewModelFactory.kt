@@ -21,7 +21,7 @@ class ViewModelFactory private constructor(private val repository: MainRepositor
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
             }
             modelClass.isAssignableFrom(ScannerViewModel::class.java) -> {
